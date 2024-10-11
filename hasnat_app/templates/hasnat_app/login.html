@@ -1,0 +1,60 @@
+
+{% load static %}
+
+
+{% block extra_css %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="side-image">
+        <img src="{% static 'images/signupimg.png' %}" alt="Signup image" />
+    </div>
+    <div class="form-padding1">
+    <div class="side-form">
+        <h3 class="login-text">Login</h2>
+        <p class="login-desc">Please enter your login details</p>
+        
+        <form method="POST">
+            {% csrf_token %}
+          
+            <div class="form-group">
+                <label>
+                    <img class="image-signup-size" src="{% static 'images/profile-2user.png' %}" alt="Email Icon" />
+                </label>
+                <input type="text" name="username" id="username" class="form-control" required placeholder=" " />
+                <label for="username">username</label>
+            </div>
+       
+     
+            <div class="form-group">
+                <label>
+                    <img class="image-signup-size" src="{% static 'images/Mask group.png' %}" alt="Password Icon" />
+                </label>
+                <input type="password" name="password" id="password" class="input-right-space" required placeholder=" " />
+                <label for="password">Password</label>
+            </div>
+            
+            
+            
+           
+            <button type="submit" class="btn btn-primary">
+                Login
+                <img class="arrow-image" src="{% static 'images/Icon.png' %}" alt="Arrow Icon" />
+            </button>
+        </form>
+        <hr>
+        
+        <p class="already-login">Dont have an account? <a href="{% url 'signup' %}" class="link-login">Create Account</a></p>
+        <!-- {% if error %}
+         <p class="text-danger">{{ error }}</p>
+        {% endif %} -->
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

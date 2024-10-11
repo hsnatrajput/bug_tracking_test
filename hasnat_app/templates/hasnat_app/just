@@ -1,0 +1,24 @@
+# @login_required(login_url='login') 
+# def project_list(request):
+#     query = request.GET.get('q')  
+#     if query:
+#         projects = Project.objects.filter(
+#             Q(name__icontains=query) | Q(description__icontains=query)
+#         )
+#     else:
+#         projects = Project.objects.all() 
+        
+#     paginator = Paginator(projects, 6) 
+#     page_number = request.GET.get('page')  
+#     page_obj = paginator.get_page(page_number)
+
+   
+#     users = User.objects.all()
+
+#     context = {
+#         'page_obj': page_obj,
+#         'projects': page_obj.object_list, 
+#         'form': ProjectForm(),
+#         'users': users 
+#     }
+#     return render(request, 'hasnat_app/project_list.html', context)

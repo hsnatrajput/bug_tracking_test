@@ -1,0 +1,49 @@
+.container {
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+h2 {
+    font-size: 2em; 
+    margin-bottom: 20px; 
+    color: #007DFA; 
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.bg-secondary {
+    background-color: #6c757d;
+}
+.action-select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.action-select:hover {
+    border-color: #007bff;
+}
+.header3 .projects-header3{
+    color: #F5F7FA ;
+}

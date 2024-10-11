@@ -1,0 +1,125 @@
+{% extends 'hasnat_app/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/project_list.css' %}">
+{% endblock %}
+{% block content %}
+
+<header class="header">
+    <div class="logo-container">
+        <div class="logo-img">
+            <img src="{% static 'images/Group.png' %}" alt="Logo" class="logo-image">
+        </div>
+        <div class="logo-text">
+            <span class="logo">Manage</span><span class="near-logo">Bug</span>
+        </div>
+    </div>
+    
+    <nav class="navbar">
+        <ul>
+            <div class="logo-img1">
+                <img src="{% static 'images/stack-bold-svgrepo-com 1.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#">Projects</a></li>
+            <div class="logo-img1">
+                <img src="{% static 'images/task-square.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#">Tasks</a></li>
+            <div class="logo-img1">
+                <img src="{% static 'images/Solid.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#">Manage</a></li>
+            <div class="logo-img1">
+                <img src="{% static 'images/profile-2user.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#">Users</a></li>
+        </ul>
+    </nav>
+    <div class="header-icons">
+        <a href="#" class="profile-icon1">
+            <img src="{% static 'images/Notification.png' %}" alt="Notification" class="profile-image">
+        </a>
+        <a href="#" class="profile-icon2">
+            <img src="{% static 'images/Message.png' %}" alt="Messages" class="profile-image">
+        </a>
+        <a href="#" class="profile-icon">
+            <img src="{% static 'images/visnext.png' %}" alt="Profile" class="profile-image">
+        </a>
+        <div class="profile-dropdown">
+            <span>Dev.</span>
+            <a href="#" class="dropdown-icon">
+                <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+            </a>
+        </div>
+    </div>
+    
+    </header>
+
+    <div class="divider"></div>
+
+
+
+<div class="projects-header">
+    <div class="projects-title">
+       
+        <h1>Dashboard</h1>
+    </div>
+    <div class="header-buttons">
+        <a href="{% url 'create_bug' %}">
+            <button class="add-project-btn">+ New Task Bug</button>
+            
+        </a>
+    </div>
+    <!-- <div class="search-container">
+        <input type="text" placeholder="Search for Projects here...">
+    </div> -->
+  
+    <div class="profile-dropdown">
+        <span>Sort by</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+    </div>
+    <div class="profile-dropdown">
+        <span>My Project</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+    </div>
+    <!-- <div class="header-buttons">
+        <a href="{% url 'create_bug' %}">
+            <button class="add-project-btn">+ New Task Bug</button>
+            
+        </a>
+    </div> -->
+    <div>
+        <a href="{% url 'create_project' %}">
+            <button class="sort-btn"><img src="{% static 'images/Group(1).png' %}" alt="Sort"></button>
+        </a>
+    </div>
+</div>
+<div class="divider"></div>
+
+
+<div class="container">
+    <!-- <h2>Welcome to the Dashboard</h2>
+    <hr> -->
+    <p>Here you can manage your projects and bugs.</p>
+    <div class="btn-group" role="group" aria-label="Project and Bug Management">
+        <a href="{% url 'project_list' %}" class="btn btn-primary">View Projects</a>
+        <br>
+        <br>
+        <a href="{% url 'bug_list' %}" class="btn btn-secondary">View Bugs</a>
+    </div>
+</div>
+<!-- <br>
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">
+        logout
+    </button>
+</form> -->
+
+{% endblock %}

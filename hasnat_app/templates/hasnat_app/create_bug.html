@@ -1,0 +1,46 @@
+
+{% extends 'hasnat_app/base.html' %}
+{% load static %}
+{% block title %}Add New Bug{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add New Bug</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ bug_form.as_p }}
+    
+        <div class="mb-3">
+            <label for="images" class="form-label">Screenshots:</label>
+            <input type="file" name="image" id="images" class="form-control" multiple>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Add New Bug</button>
+    </form>
+    {% for img in image %}
+    <img src="{img.image}" alt="image">
+    {% endfor %}
+</div>
+<script>
+    document.getElementById('id_type').addEventListener('change', function() {
+        let selectedType = this.value;
+        let statusField = document.getElementById('id_status');
+        
+        if (selectedType === 'bug') {
+            statusField.innerHTML = `
+                <option value="new">New</option>
+                <option value="started">Started</option>
+                <option value="resolved">Resolved</option>
+            `;
+        } else if (selectedType === 'feature') {
+            statusField.innerHTML = `
+                <option value="new">New</option>
+                <option value="started">Started</option>
+                <option value="completed">Completed</option>
+            `;
+        }
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% load static %}
+
+{% block extra_css %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="side-image">
+        <img src="{% static 'images/signupimg.png' %}" alt="Signup image" />
+    </div>
+
+    <div class="form-padding3">
+    <div class="side-form1">
+        <h2 class="join-us">Join Us!</h2>
+        <p class="join-us-desc">To begin this journey, tell us what type of account <br>you'll be opening.</p>
+
+        <div class="role-tile1">
+            <a href="{% url 'signup' %}?user_type=manager" class="tile">
+                <div class="tile-content">
+                 
+                    <div class="stacked-images">
+                        <img src="{% static 'images/Polygon 1.png' %}" alt="Polygon Background">
+                        <img src="{% static 'images/user.png' %}" alt="User Icon" class="top-image">
+                    </div>
+                  
+                    <div class="tile-right">
+                        <h3>Manager</h3>
+                        <p>Sign up as a Manager to manage <br> the tasks and bugs.</p>
+                    </div>
+                   
+                    <div class="arrow-right">
+                        <img src="{% static 'images/arrow-right.png' %}" alt="Arrow Right">
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+
+        <div class="role-tile11">
+            <a href="{% url 'signup' %}?user_type=developer" class="tile">
+                <div class="tile-content">
+                 
+                    <div class="stacked-images">
+                        <img src="{% static 'images/Polygon 2.png' %}" alt="Polygon Background">
+                        <img src="{% static 'images/briefcase.png' %}" alt="User Icon" class="top-image">
+                    </div>
+                  
+                    <div class="tile-right">
+                        <h3>Developer</h3>
+                        <p>Signup as a Developer to <br>assign the relevant task to QA</p>
+                    </div>
+                
+                    <!-- <div class="arrow-right">
+                        <img src="{% static 'images/arrow-right.png' %}" alt="Arrow Right">
+                    </div>  -->
+                </div>
+            </a>
+        </div>
+        
+
+
+        <div class="role-tile111">
+            <a href="{% url 'signup' %}?user_type=qa" class="tile">
+                <div class="tile-content">
+                  
+                    <div class="stacked-images">
+                        <img src="{% static 'images/Polygon 2.png' %}" alt="Polygon Background">
+                        <img src="{% static 'images/freelancer-freelance 1.png' %}" alt="User Icon" class="top-image">
+                    </div>
+                  
+                    <div class="tile-right">
+                        <h3>QA</h3>
+                        <p>Signup as a QA to create the <br>bugs and report in tasks</p>
+                    </div>
+                
+                    <!-- <div class="arrow-right">
+                        <img src="{% static 'images/arrow-right.png' %}" alt="Arrow Right">
+                    </div>  -->
+                </div>
+            </a>
+        </div>
+        <div>
+            <p class="signin-message">Already have an account? <a class="link" href="{% url 'login' %}">Sign in</a></p>
+        </div>
+   
+   
+</div>
+{% endblock %}

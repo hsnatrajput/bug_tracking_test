@@ -1,0 +1,84 @@
+{% load static %}
+
+{% block extra_css %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="signup-container">
+    <div class="side-image">
+        <img src="{% static 'images/signupimg.png' %}" alt="Signup image" />
+    </div>
+
+    <div class="form-padding">
+            <div class="side-form2">
+            <h3 class="signup-heading">Signup</h3>
+            <p class="signup-desc">Please fill in your information below</p>
+            <div class="side-form4">
+            <form method="POST" class="form-signup">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>
+                        <img class="image-signup-size" src="{% static 'images/Profile.png' %}" alt="Username Icon" />
+                    </label>
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <img class="image-signup-size" src="{% static 'images/mobile.png' %}" alt="Mobile Icon" />
+                    </label>
+                    {{ form.phone_number }}
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <img class="image-signup-size" src="{% static 'images/Solid.png' %}" alt="Email Icon" />
+                    </label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <img class="image-signup-size" src="{% static 'images/Mask group.png' %}" alt="Password Icon" />
+                    </label>
+                    {{ form.password1 }}
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <img class="image-signup-size" src="{% static 'images/Mask group.png' %}" alt="Password Icon" />
+                    </label>
+                    {{ form.password2 }}
+                </div>
+
+                <input type="hidden" name="user_type" value="{{ user_type }}">
+
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                <li>{{ field|capfirst }}: {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary">
+                    Signup
+                    <img class="arrow-image" src="{% static 'images/Icon.png' %}" alt="Arrow Icon" />
+                </button>
+                <hr>
+                <p class="already-text">Already have an account? <a href="{% url 'login' %}" class="link-login">Login to your account</a></p>
+            </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
