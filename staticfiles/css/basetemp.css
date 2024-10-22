@@ -1,26 +1,18 @@
-
-
-/* style.css */
-
-/* Global Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f5f7fa;
-    color: #252C32; /* Text color */
+    color: #252C32; 
 }
-
 .container {
     width: 90%;
     margin: 0 auto;
     max-width: 1200px;
     padding: 20px;
 }
-
-/* Header */
 header {
-    background-color: #007DFA; /* Primary color */
+    background-color: #007DFA; 
     padding: 15px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -48,10 +40,8 @@ header nav ul li a:hover {
     color: #007DFA;
     border-radius: 5px;
 }
-
-/* Buttons */
 button, a.button {
-    background-color: #007DFA; /* Primary color */
+    background-color: #007DFA; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -66,10 +56,9 @@ button, a.button {
 button:hover, a.button:hover {
     background-color: #005bb5;
 }
-
-/* Main Content */
 h2 {
-    color: #007DFA; /* Primary color for headings */
+    color: #007DFA; 
+    
     font-size: 32px;
     margin-bottom: 20px;
 }
@@ -80,7 +69,7 @@ p {
 }
 
 a {
-    color: #007DFA; /* Link color */
+    color: #007DFA; 
     text-decoration: none;
     font-weight: bold;
 }
@@ -89,9 +78,8 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Footer */
 footer {
-    background-color: #252C32; /* Dark footer */
+    background-color: #252C32; 
     color: white;
     text-align: center;
     padding: 15px 0;

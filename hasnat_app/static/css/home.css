@@ -1,16 +1,48 @@
+/* Initial state: hide the arrow-right by default */
+.role-tile1 .arrow-right,
+.role-tile11 .arrow-right,
+.role-tile111 .arrow-right {
+    opacity: 0;  /* Hide the arrow */
+    transition: opacity 0.3s ease;  /* Smooth transition */
+}
 
+/* Show the arrow-right when hovering over the respective tiles */
+.role-tile1:hover .arrow-right,
+.role-tile11:hover .arrow-right,
+.role-tile111:hover .arrow-right {
+    opacity: 1;  /* Show the arrow on hover */
+}
 
+/* Tile hover effect (already present) */
+.role-tile1:hover,
+.role-tile11:hover,
+.role-tile111:hover {
+    background-color: #F5F5F7;
+}
+
+/* General tile styles */
+.tile {
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    background-color: #FFFFFF;
+}
+
+.tile:hover {
+    background-color: #F5F5F7; 
+}
+
+/* Tile content styling */
 .tile-content {
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
     padding: 10px; 
     border-radius: 8px;
-    background-color: #FFFFFF;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease; 
 }
 
-
+/* Stacked images container */
 .stacked-images {
     display: flex;
     position: relative; 
@@ -19,20 +51,19 @@
     margin-right: 20px; 
 }
 
-
+/* Position images inside the container */
 .stacked-images img {
     position: absolute;  
     top: 0;
     left: 0;
 }
 
-
 .stacked-images img:first-child {
     width: 90%;  
     height: 90%; 
 }
 
-
+/* Styling for the top image */
 .stacked-images .top-image {
     z-index: 1; 
     width: 50%;  
@@ -41,35 +72,32 @@
     left: 20%;  
     opacity: 0.8;  
 }
+
+/* Arrow-right container styling */
 .arrow-right {
     width: 24px; 
     height: 24px; 
     display: flex;
     align-items: center; 
     justify-content: center;
-  
 }
 
 .arrow-right img {
     width: 100%;
     height: auto; 
- 
 }
 
+/* Text alignment and spacing */
 .tile-right {
     flex-grow: 1;  
     text-align: left; 
-    background-color: #FFFFFF;
-
 }
-
 
 .tile-right h3 {
     margin: 0; 
     font-size: 1.5rem; 
     color: #252C32; 
 }
-
 
 .tile-right p {
     margin: -8px; 
@@ -78,34 +106,23 @@
     color: #555; 
 }
 
-
-.tile:hover {
-    background-color: #e2e6ea; 
-}
-
-
+/* Font styles */
 .tile-content h3 {
     font-family: 'Poppins'; 
-  
-font-size: 16px;
-font-weight: 500;
-line-height: 24px;
-text-align: left;
-
-    font-size: 16px; 
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
     margin: 0; 
     color: #007DFA; 
-    text-align: left; 
 }
 
 .tile-content p {
-    font-family: Poppins;
-font-size: 14px;
-font-weight: 400;
-line-height: 21px;
-text-align: left;
-
-    font-size: 14px; 
+    font-family: 'Poppins'; 
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
     margin-top: 5px; 
     font-weight: normal; 
     color: #8692A6;
@@ -113,73 +130,53 @@ text-align: left;
     padding-right: 10px;
 }
 
-
+/* Individual tile styles */
 .role-tile1,
 .role-tile11,
 .role-tile111 {
     width: 426px;
     height: 108px;
-    top: 405px;
-    left: 918px;
-    gap: 0px;
-    margin-bottom: 50px;
-
+    margin-bottom: 1rem;
+    background-color: #FFFFFF;
 }
+
+/* Other additional styling */
 .join-us {
     width: 114px;
-height: 42px;
-top: 265px;
-left: 918px;
-gap: 0px;
-opacity: 0px;
-
+    height: 42px;
     font-family: Poppins;
     font-size: 28px;
     font-weight: 700;
     line-height: 42px;
-    text-align: left;
-    
+    text-align: left;  
     color: #2F3367;
-
 }
 
 .signin-message {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 30px;
     text-align: right;
-    font-family: Poppins;
-font-size: 18px;
-font-weight: 500;
-line-height: 25px;
-text-align: right;
-color: #8692A6;
- 
-}
-.join-us-desc{
-    font-family: Poppins;
-font-size: 16px;
-font-weight: 400;
-line-height: 28px;
-text-align: left;
-color: #8692A6;
-
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 25px;
+    color: #8692A6;
 }
 
-.tile{
-    background-color: #FFFFFF;
-  
+.join-us-desc {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+    color: #8692A6;
 }
-/* .form-padding{
-    padding: 3px;
-    margin-top: 15px;
-  
-} */
- .form-padding3{
+
+.form-padding3 {
     padding: 0px;
+}
 
- }
-.link{
+.link {
     text-decoration: none;
 }
-

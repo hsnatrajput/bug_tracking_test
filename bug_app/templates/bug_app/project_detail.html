@@ -1,0 +1,444 @@
+{% extends 'bug_app/base.html' %}
+{% load static %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/project_listtt.css' %}">
+<link rel="stylesheet" href="{% static 'css/bug_list.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<header class="header" >
+    <div class="logo-container">
+       <div class="logo-img">
+            <a href="{% url 'project_list' %}">
+                <img src="{% static 'images/Group.png' %}" alt="Logo" class="logo-image">
+            </a>
+        </div>
+        <div class="logo-text">
+            <span class="logo">Manage</span><span class="near-logo">Bug</span>
+        </div>
+    </div>
+    <nav class="navbar">
+        <ul>
+            <div class="logo-img1">
+                <img src="{% static 'images/stack-bold-svgrepo-com 1.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Projects</a></li>
+            <div class="logo-img2">
+                <img src="{% static 'images/task-square.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Tasks</a></li>
+            <div class="logo-img3">
+                <img src="{% static 'images/Solid.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Manage</a></li>
+            <div class="logo-img4">
+                <img src="{% static 'images/profile-2user.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Users</a></li>
+        </ul>
+    </nav>
+    <div class="header-icons">
+        <a href="#" class="profile-icon1">
+            <img src="{% static 'images/Notification.png' %}" alt="Notification" class="profile-image">
+        </a>
+        <a href="#" class="profile-icon2">
+            <img src="{% static 'images/Message.png' %}" alt="Messages" class="profile-image">
+        </a>
+        <a href="#" class="profile-icon">
+            <img src="{% static 'images/visnext.png'%}" alt="Profile" class="profile-image9">
+        </a>
+        <span class="user-n">{{ user.username }}</span>
+        <div class="profile-dropdown">
+            <div class="dropdown">
+                <a href="#" class="dropdown-icon" onclick="toggleDropdown(event)">
+                    <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+                </a>
+                <div id="dropdown-menu" class="dropdown-menu">
+                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<hr>
+<div class="projects-header" >
+    <div class="bug-container">
+        <div class="projects-titlee">
+            <p class="project-name">Project > <span class="name-project">{{ project.name }} </span></p>
+            <h1 class="all-bug">All Bug Listing</h1>
+        </div>
+        <div class="bugs">
+            <span class="bug">Bugs</span>
+        </div>
+    </div>   
+    <div class="header-buttons">
+        <img src="{% static 'images/Icon button(1).png' %}" alt="Logo" class="logo-image">
+        <img src="{% static 'images/Icon button.png' %}" alt="Logo" class="logo-image">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBugModal">
+            + New Task Bug
+        </button>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="projects-header" >
+    <div class="search-container1">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Search for Bugs here..." value="{{ request.GET.q }}">
+        </form>
+    </div> 
+    <div class="profile-dropdown">
+        <div>
+        <span class="text-head">Sub Tasks</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+        </div>
+        <div>
+        <span class="text-head">Me</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+        </div>
+        <div>
+        <span class="text-head">Assignees</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+        </div>
+    </div>
+
+    <div class="header-icons">
+        <img src="{% static 'images/_Button base.png' %}" alt="Logo" class="logo-image">
+        <img src="{% static 'images/_Button base(1).png' %}" alt="Logo" class="logo-image">
+        <img src="{% static 'images/Horizontal grouped icon tab(1).png' %}" alt="Logo" class="logo-image">
+        <img src="{% static 'images/Horizontal grouped icon tab.png' %}" alt="Logo" class="logo-image">
+    </div>    
+</div>
+<div class="divider"></div>
+<div class="container">
+     <table class="bug-table">
+        <thead>
+            <tr>
+                <th style= "background-color:#F9FAFC"><input type="checkbox" id="select-all"></th> 
+                <th class="table-head">BUG DETAIL</th>
+                <th class="table-head">STATUS</th>
+                <th class="table-head">DUE DATE</th>
+                <th class="table-head">ASSIGNED TO</th>
+                <th class="table-head">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bug in bugs %}
+            <tr>
+                <td><input type="checkbox" class="bug-checkbox" value="{{ bug.id }}"></td>
+
+              <td class="bug-status">
+               <img src="{% if bug.status == 'new' %}
+                /static/images/new.png
+                {% elif bug.status == 'started' %}
+                  /static/images/started.png
+                {% elif bug.status == 'resolved' %}
+                  /static/images/done.png
+                 {% elif bug.status == 'completed' %}
+                  /static/images/done.png
+                {% endif %}" 
+                 alt="{{ bug.status }} status icon" class="status-icon" />
+                <span class="bug-title">{{ bug.title }}</span>
+               </td>
+                <td class="bug-status">
+                    <span class="status {{ bug.status }}">{{ bug.status }}</span>
+                </td>
+                <td>
+                    <div class="deadline-box">
+                        <img src="{% static 'images/calender.png' %}" alt="Logo" class="logo-image" onclick="toggleDateInput({{ bug.id }})">
+                        <input type="date" id="deadlineInput-{{ bug.id }}" class="date-input" value="{{ bug.deadline|date:'Y-m-d' }}" style="display: none;" onchange="updateDeadline({{ bug.id }})">
+                    </div>
+                </td>
+                <td><span class="bug-title">{{ bug.assigned_to.username }}</span></td>
+                <td>
+                    <div class="action-dots" onclick="toggleActionBox(event, {{ bug.id }})">
+                        &#8230;
+                    </div>
+                    <div id="action-box-{{ bug.id }}" class="action-box" style="display: none;">
+                        <div>
+                            <div class="status-container">
+                              
+                                <label>Change Status</label>
+                                  <img src="{% static 'images/icon.png' %}" alt="Logo" class="set-img">
+                            </div>
+                            <div>
+                                {% if bug.type == 'bug' %}
+                                <div>
+                                    <span class="badge status new1" onclick="updateBugStatus('{{ bug.id }}', 'new')" style="cursor: pointer;">New</span>
+                                </div>
+                                <div>
+                                    <span class="badge status started1" onclick="updateBugStatus('{{ bug.id }}', 'started')" style="cursor: pointer;">Started</span>
+                                </div>
+                                <div>
+                                    <span class="badge status resolved1" onclick="updateBugStatus('{{ bug.id }}', 'resolved')" style="cursor: pointer;">Resolved</span>
+                                </div>
+                                {% elif bug.type == 'feature' %}
+                                <div>
+                                    <span class="badge status new1" onclick="updateBugStatus('{{ bug.id }}', 'new')" style="cursor: pointer;">New</span>
+                                </div>
+                                <div>
+                                    <span class="badge status started1" onclick="updateBugStatus('{{ bug.id }}', 'started')" style="cursor: pointer;">Started</span>
+                                </div>
+                                <div>
+                                    <span class="badge status completed1" onclick="updateBugStatus('{{ bug.id }}', 'completed')" style="cursor: pointer;">Completed</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if request.user.user_type == 'manager' or request.user.user_type == 'qa' %}
+                        <hr>
+                        <div class="delete-container">     
+                            <div class="action-option" onclick="deleteBug('{{ bug.id }}')">Delete</div>
+                            <img src="{% static 'images/del-pic.png' %}" alt="Logo" class="set-img">
+                        </div>  
+                        {% endif %}
+                    </div>
+                </td>         
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No bugs available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<div class="modal fade" id="addBugModal" tabindex="-1" role="dialog" aria-labelledby="addBugModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close1" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>      
+            <div class="modal-header1">
+                <h5 class="modal-title" id="addBugModalLabel">Add new bug</h5>
+                <span class="ellipsis">•••</span>
+            </div>
+            <form id="addBugForm" method="POST" action="{% url 'create_project_bug' project.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-container1">
+                        <div class="form-group3">
+                            <label for="assigned-to">Assign To</label>
+                            <select class="form-control" id="assigned-to" name="assigned_to" required>
+                                <option value="">Assign To</option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}">{{ user.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group3">
+                            <label for="bug-deadline">Add Due Date</label>
+                            <input type="date" class="form-control" id="bug-deadline" name="deadline">
+                        </div>
+                    </div>
+                    <div class="form-group1">
+                        <input type="text" class="form-control1 bug-title" id="bug-title" name="title" placeholder="Add title here" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bug-description">Bug details</label>
+                        <input class="form-control" id="bug-description" name="description" rows="4" placeholder="Add here" required></input>
+                    </div>
+                    <div class="f-c">
+                        <div class="form-group4">
+                            <select class="form-control" id="bug-type" name="type" required>
+                                <option value="">Bug Type</option>
+                                <option value="bug">Bug</option>
+                                <option value="feature">Feature</option>
+                            </select>
+                        </div>
+                    
+                    </div>
+                <div class="file-drop-area">
+                    <img src="{% static 'images/picup.png' %}" alt="Logo" class="logo-image11">  
+                     <p> Drop any file here or <a href="#" class="dropdown-icon">browse</a></p>
+                     <input type="file" class="form-control2" id="bug-screenshot" name="image" multiple>     
+                </div>
+            </form>
+            <footer class="modal-footer">
+                {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> {% endcomment %}
+                <button type="submit" class="btn btn-primary">Add </button>
+        </footer>
+        </div>
+       
+    </div>
+ 
+</div> 
+
+<script>
+
+    function toggleDropdown(event) {
+        event.stopPropagation();  
+        var dropdown = document.getElementById("dropdown-menu");
+      
+        if (dropdown.style.display === "none" || dropdown.style.display === "") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+
+    window.onclick = function() {
+        var dropdown = document.getElementById("dropdown-menu");
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        }
+    };
+
+    function toggleActionBox(event, bugId) {
+        event.stopPropagation();
+        const actionBox = document.getElementById(`action-box-${bugId}`);
+        const allActionBoxes = document.querySelectorAll('.action-box');
+        allActionBoxes.forEach(box => {
+            if (box !== actionBox) {
+                box.style.display = 'none';
+            }
+        });
+        if (actionBox.style.display === 'none' || actionBox.style.display === '') {
+            actionBox.style.display = 'block';
+        } else {
+            actionBox.style.display = 'none';
+        }
+    }
+ 
+    document.addEventListener('click', function(event) {
+        const allActionBoxes = document.querySelectorAll('.action-box');
+        allActionBoxes.forEach(box => {
+            if (!event.target.closest('.action-dots') && !event.target.closest('.action-box')) {
+                box.style.display = 'none';
+            }
+        });
+    });
+
+    function updateBugStatus(bugId, newStatus) {
+        fetch(`/bug/${bugId}/status_update/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken(),
+            },
+            body: JSON.stringify({ status: newStatus }) 
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Bug status updated successfully!');
+                location.reload(); 
+            } else {
+                alert('Error updating bug status');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating bug status:', error);
+            alert('Error updating bug status');
+        });
+    }
+    
+    function getCSRFToken() {
+        const cookieValue = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+        return cookieValue ? cookieValue.split('=')[1] : '';
+    }
+    
+    function deleteBug(bugId) {
+        fetch(`/bug/${bugId}/delete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCSRFToken(), 
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Bug deleted successfully!');
+                location.reload(); 
+            } else {
+                alert('Error deleting bug');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting bug:', error);
+            alert('Error deleting bug');
+        });
+    }
+    
+    function getCSRFToken() {
+        const cookieValue = document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+        return cookieValue;
+    }
+
+    $(document).ready(function () {
+        $('#bug-type').change(function () {
+            var bugType = $(this).val();
+            var bugStatus = $('#bug-status');
+
+            bugStatus.empty(); 
+            bugStatus.append('<option value="">Bug Status</option>'); 
+
+            if (bugType === 'bug') {
+                bugStatus.append('<option value="new">New</option>');
+                bugStatus.append('<option value="started">Started</option>');
+                bugStatus.append('<option value="resolved">Resolved</option>');
+            } else if (bugType === 'feature') {
+                bugStatus.append('<option value="new">New</option>');
+                bugStatus.append('<option value="started">Started</option>');
+                bugStatus.append('<option value="completed">Completed</option>');
+            }
+        });
+    });
+
+    function toggleDateInput(bugId) {
+        const dateInput = document.getElementById(`deadlineInput-${bugId}`);
+        
+        if (dateInput.style.display === 'none') {
+            dateInput.style.display = 'block';
+            dateInput.focus(); 
+        } else {
+            dateInput.style.display = 'none';
+        }
+    }
+    
+    function updateDeadline(bugId) {
+        const deadlineInput = document.getElementById(`deadlineInput-${bugId}`);
+        const deadline = deadlineInput.value;
+    
+        fetch(`/update-deadline/${bugId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}' 
+            },
+            body: JSON.stringify({ deadline: deadline })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Deadline updated successfully!');
+                const dateElement = document.querySelector(`span.deadline-date[data-bug-id="${bugId}"]`);
+                dateElement.textContent = deadline;
+                deadlineInput.style.display = 'none'; 
+            } else {
+                alert('Failed to update deadline.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,285 @@
+{% extends 'hasnat_app/base.html' %}
+{% load static %}
+{% block title %}Projects{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/project_list.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<header class="header" style= "background-color:#F5F7FA" >
+    <div class="logo-container">
+        <div class="logo-img">
+            <a href="{% url 'project_list' %}">
+                <img src="{% static 'images/Group.png' %}" alt="Logo" class="logo-image">
+            </a>
+        </div>
+        <div class="logo-text">
+            <span class="logo">Manage</span><span class="near-logo">Bug</span>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <ul>
+            <div class="logo-img1">
+                <img src="{% static 'images/stack-bold-svgrepo-com 1.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Projects</a></li>
+            <div class="logo-img1">
+                <img src="{% static 'images/task-square.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Tasks</a></li>
+            <div class="logo-img1">
+                <img src="{% static 'images/Solid.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#" class="li-text">Manage</a></li>
+            <div class="logo-img1">
+                <img src="{% static 'images/profile-2user.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <li><a href="#"class="li-text">Users</a></li>
+        </ul>
+    </nav>
+    <div class="header-icons">
+        <a href="#" class="profile-icon1">
+            <img src="{% static 'images/Notification.png' %}" alt="Notification" class="profile-image">
+        </a>
+        <a href="#" class="profile-icon2">
+            <img src="{% static 'images/Message.png' %}" alt="Messages" class="profile-image">
+        </a>
+        <div class="profile-dropdown">
+            <div class="dropdown">
+                <a href="#" class="profile-icon">
+                    <img src="{% static 'images/visnext.png' %}" alt="Profile" class="profile-image">
+                </a>
+                <span>{{ user.username }}</span>
+                <a href="#" class="dropdown-icon" onclick="toggleDropdown(event)">
+                    <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+                </a>
+                <div id="dropdown-menu" class="dropdown-menu">
+                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<hr>
+<div class="projects-header" style= "background-color:#F5F7FA;border-left: 6px solid green;">
+    <div class="projects-title">
+        <h1>Projects</h1>
+        <p>Hi DeVisnext, welcome to ManageBug</p>
+    </div>
+    <div class="search-container">
+        <form method="GET" action="{% url 'project_list' %}">
+            <input type="text" name="q" placeholder="Search for Projects here..." value="{{ request.GET.q }}">
+        </form>
+    </div>
+    <div class="header-buttons">
+        <button class="sort-btn" id="open-project-modal">
+            + Add New Project
+        </button>
+    </div>
+     <div class="profile-dropdown">
+        <span class="text-head2">Sort by</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+    </div>
+    <div class="profile-dropdown">
+        <span class="text-head2">My Project</span>
+        <a href="#" class="dropdown-icon">
+            <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
+        </a>
+    </div> 
+    <div class="btn-div">
+        <button class="img-btn" >
+            <img src="{% static 'images/Group(1).png' %}" alt="Sort">
+        </button>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="containerr mt-5">
+    {% if projects %}
+        <ul class="list-group1">
+            {% for project in projects %}
+                <li class="list-group-item2">
+                    <a href="{% url 'project_detail' project.id %}" class="project-link">
+                        <img src="{{ project.image.url }}" alt="{{ project.name }}" class="project-img">
+                        <a href="{% url 'project_detail' project.id %}" class="project-link">
+                            <h3 class="b" style = "color:#000000;">{{ project.name }}</h3>
+                        </a>
+                        <p class="light">{{ project.description }}</p>
+                    </a>
+                    <p class="task-done">Task done: <span class="done-ratio">{{ project.done_tasks }}/{{ project.total_bugs }}</span></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No projects available. Please create a new project.</p>
+    {% endif %}
+  <div class="pagination-buttons">
+        {% if page_obj.has_previous %}
+            <a href="?page=1&display={{ request.GET.display }}">«</a>
+            <a href="?page={{ page_obj.previous_page_number }}&display={{ request.GET.display }}">‹</a>
+        {% else %}
+            <span class="disabled">«</span>
+            <span class="disabled">‹</span>
+        {% endif %}
+
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <span class="current">{{ i }}</span>
+            {% else %}
+                <a href="?page={{ i }}&display={{ request.GET.display }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&display={{ request.GET.display }}">›</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&display={{ request.GET.display }}">»</a>
+        {% else %}
+            <span class="disabled">›</span>
+            <span class="disabled">»</span>
+        {% endif %}
+    </div>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div id="projectModal" class="modal">
+    <div class="modal-content">
+        <span class="close-project-modal">&times;</span>
+        <h2>Create New Project</h2>
+        <form id="projectForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <button type="submit" class="submit-btn">Create Project</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown(event) {
+        event.stopPropagation();  
+        var dropdown = document.getElementById("dropdown-menu");
+      
+        if (dropdown.style.display === "none" || dropdown.style.display === "") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+    window.onclick = function() {
+        var dropdown = document.getElementById("dropdown-menu");
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        }
+    };
+    var projectModal = document.getElementById("projectModal");
+    var projectBtn = document.getElementById("open-project-modal");
+    var closeProjectBtn = document.getElementsByClassName("close-project-modal")[0];
+    projectBtn.onclick = function() {
+        projectModal.style.display = "block";
+    }
+    closeProjectBtn.onclick = function() {
+        projectModal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == projectModal) {
+            projectModal.style.display = "none";
+        }
+    }
+    document.getElementById("projectForm").onsubmit = function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        fetch("{% url 'create_project' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                projectModal.style.display = "none";
+                window.location.reload();  
+            } else {
+                alert("Failed to create project. Please try again.");
+            }
+        })
+        .catch((error) => console.log('Error:', error));
+    };
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector(".close-project-modal").addEventListener("click", function() {
+        document.getElementById("projectModal").style.display = "none";
+    });
+    document.getElementById("projectForm").addEventListener("submit", function() {     
+        document.getElementById("projectModal").style.display = "none";
+    });
+});
+</script>
+
+<style>
+#projectModal {
+  display: none; 
+  position: fixed; 
+  z-index: 999; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+#projectModal .modal-content {
+  background-color: white;
+  margin: 3% auto; 
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #007DFA; 
+  width: 40%; 
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
+}
+.close-project-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-project-modal:hover, .close-project-modal:focus {
+  color: #007DFA; 
+  text-decoration: none;
+}
+.submit-btn {
+  background-color: #007DFA; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.submit-btn:hover {
+  background-color: #005bb5; 
+}
+#projectForm input, #projectForm select, #projectForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#projectForm input:focus, #projectForm select:focus, #projectForm textarea:focus {
+  border: 1px solid #007DFA;
+  outline: none;
+}
+</style>
+
+{% endblock %}

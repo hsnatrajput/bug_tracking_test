@@ -1,4 +1,4 @@
-{% extends 'hasnat_app/base.html' %}
+{% comment %} {% extends 'hasnat_app/base.html' %}
 {% load static %}
 
 {% block title %}Dashboard{% endblock %}
@@ -88,12 +88,12 @@
             <img src="{% static 'images/downarrow.png' %}" alt="Dropdown arrow" class="profile-image">
         </a>
     </div>
-    <!-- <div class="header-buttons">
+    <!-- "<div class="header-buttons">
         <a href="{% url 'create_bug' %}">
             <button class="add-project-btn">+ New Task Bug</button>
             
         </a>
-    </div> -->
+    </div>" -->
     <div>
         <a href="{% url 'create_project' %}">
             <button class="sort-btn"><img src="{% static 'images/Group(1).png' %}" alt="Sort"></button>
@@ -104,8 +104,8 @@
 
 
 <div class="container">
-    <!-- <h2>Welcome to the Dashboard</h2>
-    <hr> -->
+    <!-- "<h2>Welcome to the Dashboard</h2>
+    <hr> "-->
     <p>Here you can manage your projects and bugs.</p>
     <div class="btn-group" role="group" aria-label="Project and Bug Management">
         <a href="{% url 'project_list' %}" class="btn btn-primary">View Projects</a>
@@ -114,12 +114,12 @@
         <a href="{% url 'bug_list' %}" class="btn btn-secondary">View Bugs</a>
     </div>
 </div>
-<!-- <br>
+<!-- "<br>
 <form method="post" action="{% url 'logout' %}">
     {% csrf_token %}
     <button type="submit">
         logout
     </button>
-</form> -->
+</form>" -->
 
-{% endblock %}
+{% endblock %} {% endcomment %}

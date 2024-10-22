@@ -8,12 +8,10 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="signup-container">
     <div class="side-image">
         <img src="{% static 'images/signupimg.png' %}" alt="Signup image" />
     </div>
-
     <div class="form-padding">
             <div class="side-form2">
             <h3 class="signup-heading">Signup</h3>
@@ -21,44 +19,37 @@
             <div class="side-form4">
             <form method="POST" class="form-signup">
                 {% csrf_token %}
-
                 <div class="form-group">
                     <label>
                         <img class="image-signup-size" src="{% static 'images/Profile.png' %}" alt="Username Icon" />
                     </label>
                     {{ form.username }}
                 </div>
-
                 <div class="form-group">
                     <label>
                         <img class="image-signup-size" src="{% static 'images/mobile.png' %}" alt="Mobile Icon" />
                     </label>
                     {{ form.phone_number }}
                 </div>
-
                 <div class="form-group">
                     <label>
                         <img class="image-signup-size" src="{% static 'images/Solid.png' %}" alt="Email Icon" />
                     </label>
                     {{ form.email }}
                 </div>
-
                 <div class="form-group">
                     <label>
                         <img class="image-signup-size" src="{% static 'images/Mask group.png' %}" alt="Password Icon" />
                     </label>
                     {{ form.password1 }}
                 </div>
-
                 <div class="form-group">
                     <label>
                         <img class="image-signup-size" src="{% static 'images/Mask group.png' %}" alt="Password Icon" />
                     </label>
                     {{ form.password2 }}
                 </div>
-
                 <input type="hidden" name="user_type" value="{{ user_type }}">
-
                 {% if form.errors %}
                     <div class="alert alert-danger">
                         <ul>
@@ -68,7 +59,6 @@
                         </ul>
                     </div>
                 {% endif %}
-
                 <button type="submit" class="btn btn-primary">
                     Signup
                     <img class="arrow-image" src="{% static 'images/Icon.png' %}" alt="Arrow Icon" />
@@ -76,8 +66,7 @@
                 <hr>
                 <p class="already-text">Already have an account? <a href="{% url 'login' %}" class="link-login">Login to your account</a></p>
             </form>
-            </div>
-            
+            </div>         
         </div>
     </div>
 </div>
