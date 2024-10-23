@@ -326,11 +326,29 @@ letter-spacing: 0.17513321340084076px;
 text-align: left;
 background-color: #F9FAFC;
 }
+.search-container1 {
+    position: relative;
+}
 .search-container1 input[type=text] {
     padding: 5px;
+    padding: 10px 50px; 
+    width: 300px;
     border: 1px solid #DDE2E4;
     border-radius: 5px;
     background-color: #FFFFFF;
+    font-family: 'Poppins';
+    color: #9AA6AC;
+font-size: 14px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.006em;
+text-align: left;
+
+}
+.search-container1 .search-img {
+    position: absolute;
+    left: 10px; 
+    margin-top: 12px;
 }
 .modal-content{
     overflow: hidden;
@@ -349,7 +367,6 @@ opacity: 1px;
 background-color: #F5F6F8;
 }
 /* .modal-header123{
-    
     display: flex;
     justify-content: space-between;
     padding: 1rem 1rem;
@@ -403,14 +420,12 @@ text-align: left;
     margin-left: 20px;
     margin-bottom: 30px;
   }
-  
   .ellipsis {
     font-size: 18px;
     color: #999; 
     margin-right: 15px; 
     margin-bottom: 30px;
   }
-  
   #addBugForm {
     margin-top: -10px; 
 }
@@ -423,8 +438,7 @@ text-align: left;
     left: 33px;
     opacity: 1; 
 }
-.f-c{
-   
+.f-c{ 
     display: flex;
     gap: 150px; 
     width: 800px;
@@ -440,12 +454,10 @@ text-align: left;
     font-family: 'Poppins';
     margin-top: 12px;
 }
-
 .form-group1 label{
     font-family: 'Poppins';
     margin-top: 12px;
 }
-
 .form-control2{
     margin-top: 1px;
     font-family: 'Poppins';
@@ -472,7 +484,6 @@ text-align: left;
     margin-top: 10px;
     white-space: nowrap; 
 }
-
 .form-group3 input {
     font-family: 'Poppins';
     flex-grow: 1; 
@@ -484,7 +495,6 @@ text-align: left;
     position: relative; 
     padding: 10px 15px;
   } */
-
   .modal-header .close1 {
     position: absolute;
     top: 5px; 
@@ -511,7 +521,6 @@ text-align: left;
     padding: 10px;
     outline: none;
 }
-
 .form-control1::placeholder {
     color: #DFDEE0; 
     font-family: Poppins;
@@ -601,8 +610,6 @@ font-family: 'Poppins';
 .bg-warning { background-color: #ffc107; }
 .bg-success { background-color: #28a745; }
 .bg-info { background-color: #17a2b8; }
-
-
 .date-input {
     margin-left: 10px;
     margin-top: 10px;

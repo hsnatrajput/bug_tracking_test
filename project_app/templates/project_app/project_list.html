@@ -71,7 +71,8 @@
     </div>
     <div class="search-container">
         <form method="GET" action="{% url 'project_list' %}">
-            <input type="text" name="q" placeholder="Search for Projects here..." value="{{ request.GET.q }}">
+            <input type="text" name="q" placeholder="Search for Projects here" value="{{ request.GET.q }}">
+            <img class="search-img" src="{% static 'images/Search.png' %}" alt="Search" />
         </form>
     </div>
     <div class="header-buttons">

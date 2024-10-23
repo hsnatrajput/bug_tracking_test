@@ -1,37 +1,27 @@
-/* Initial state: hide the arrow-right by default */
 .role-tile1 .arrow-right,
 .role-tile11 .arrow-right,
 .role-tile111 .arrow-right {
-    opacity: 0;  /* Hide the arrow */
-    transition: opacity 0.3s ease;  /* Smooth transition */
+    opacity: 0;  
+    transition: opacity 0.3s ease;  
 }
-
-/* Show the arrow-right when hovering over the respective tiles */
 .role-tile1:hover .arrow-right,
 .role-tile11:hover .arrow-right,
 .role-tile111:hover .arrow-right {
-    opacity: 1;  /* Show the arrow on hover */
+    opacity: 1;  
 }
-
-/* Tile hover effect (already present) */
 .role-tile1:hover,
 .role-tile11:hover,
 .role-tile111:hover {
     background-color: #F5F5F7;
 }
-
-/* General tile styles */
 .tile {
     cursor: pointer; 
     transition: background-color 0.3s ease; 
     background-color: #FFFFFF;
 }
-
 .tile:hover {
     background-color: #F5F5F7; 
 }
-
-/* Tile content styling */
 .tile-content {
     display: flex; 
     align-items: center; 
@@ -41,8 +31,6 @@
     margin-bottom: 15px;
     transition: background-color 0.3s ease; 
 }
-
-/* Stacked images container */
 .stacked-images {
     display: flex;
     position: relative; 
@@ -50,20 +38,15 @@
     height: 48px;
     margin-right: 20px; 
 }
-
-/* Position images inside the container */
 .stacked-images img {
     position: absolute;  
     top: 0;
     left: 0;
 }
-
 .stacked-images img:first-child {
     width: 90%;  
     height: 90%; 
 }
-
-/* Styling for the top image */
 .stacked-images .top-image {
     z-index: 1; 
     width: 50%;  
@@ -72,8 +55,6 @@
     left: 20%;  
     opacity: 0.8;  
 }
-
-/* Arrow-right container styling */
 .arrow-right {
     width: 24px; 
     height: 24px; 
@@ -81,32 +62,25 @@
     align-items: center; 
     justify-content: center;
 }
-
 .arrow-right img {
     width: 100%;
     height: auto; 
 }
-
-/* Text alignment and spacing */
 .tile-right {
     flex-grow: 1;  
     text-align: left; 
 }
-
 .tile-right h3 {
     margin: 0; 
     font-size: 1.5rem; 
     color: #252C32; 
 }
-
 .tile-right p {
     margin: -8px; 
     margin-top: 10px; 
     font-size: 1rem; 
     color: #555; 
 }
-
-/* Font styles */
 .tile-content h3 {
     font-family: 'Poppins'; 
     font-size: 16px;
@@ -129,8 +103,6 @@
     padding-left: 10px; 
     padding-right: 10px;
 }
-
-/* Individual tile styles */
 .role-tile1,
 .role-tile11,
 .role-tile111 {
@@ -139,8 +111,6 @@
     margin-bottom: 1rem;
     background-color: #FFFFFF;
 }
-
-/* Other additional styling */
 .join-us {
     width: 114px;
     height: 42px;

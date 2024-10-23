@@ -38,7 +38,7 @@ def project_list(request):
 
 @login_required
 def create_project(request):
-    if request.user.user_type not in ['manager']:
+    if request.user.user_type != 'manager':
         return render(request, 'hasnat_app/error.html') 
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
